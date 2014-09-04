@@ -9,6 +9,9 @@ import android.graphics.drawable.Drawable;
  */
 public class KikPhotoMessage extends KikMessage
 {
+    private static int PREVIEW_IMAGE_MAX_SIZE = 400;
+    private static int IMAGE_MAX_SIZE = 960;
+
     /**
      * A KikPhotoMessage requires an image URL and preview URL. Use KikImageUtil.createImageURL to
      * ensure a valid image and preview URL are provided.
@@ -27,19 +30,40 @@ public class KikPhotoMessage extends KikMessage
         _previewUrl = previewURL;
     }
 
+    /**
+     * KikPhotoMessage with a scaled preview and image from drawable resource.
+     * @param context
+     * @param drawable
+     */
     public KikPhotoMessage(Context context, Drawable drawable)
     {
-        this(context, KikImageUtil.generateEncodedURLForImage(drawable), KikImageUtil.generateEncodedURLForImage(drawable));
+        this(context,
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(drawable, IMAGE_MAX_SIZE, IMAGE_MAX_SIZE)),
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(drawable, PREVIEW_IMAGE_MAX_SIZE, PREVIEW_IMAGE_MAX_SIZE)));
     }
 
+    /**
+     * KikPhotoMessage with a scaled preview and image from bitmap resource.
+     * @param context
+     * @param bitmap
+     */
     public KikPhotoMessage(Context context, Bitmap bitmap)
     {
-        this(context, KikImageUtil.generateEncodedURLForImage(bitmap), KikImageUtil.generateEncodedURLForImage(bitmap));
+        this(context,
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(bitmap, IMAGE_MAX_SIZE, IMAGE_MAX_SIZE)),
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(bitmap, PREVIEW_IMAGE_MAX_SIZE, PREVIEW_IMAGE_MAX_SIZE)));
     }
 
+    /**
+     * KikPhotoMessage with a scaled preview and image from byte[] resource.
+     * @param context
+     * @param bytes
+     */
     public KikPhotoMessage(Context context, byte[] bytes)
     {
-        this(context, KikImageUtil.generateEncodedURLForImage(bytes), KikImageUtil.generateEncodedURLForImage(bytes));
+        this(context,
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(bytes, IMAGE_MAX_SIZE, IMAGE_MAX_SIZE)),
+                KikImageUtil.generateEncodedURLForImage(KikImageUtil.generateScaledBitmap(bytes, PREVIEW_IMAGE_MAX_SIZE, PREVIEW_IMAGE_MAX_SIZE)));
     }
 
     @Override

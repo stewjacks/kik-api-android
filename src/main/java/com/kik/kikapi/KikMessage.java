@@ -74,6 +74,11 @@ public abstract class KikMessage
         _iconUrl = KikImageUtil.generateEncodedURLForImage(icon);
     }
 
+    /**
+     * 
+     * @param fallbackURL
+     * @param platform
+     */
     public void addFallbackURL(String fallbackURL, KikMessagePlatform platform)
     {
         try {
@@ -88,7 +93,11 @@ public abstract class KikMessage
         _URLs.add(fallback);
     }
 
-    public String linkRepresentation()
+    /**
+     * 
+     * @return
+     */
+    protected String linkRepresentation()
     {
         StringBuilder builder = new StringBuilder();
         builder.append(KIK_MESSENGER_API_SEND_URL);

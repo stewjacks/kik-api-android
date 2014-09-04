@@ -24,6 +24,9 @@ local.properties
 # Maven generated folders
 target/
 
+# Gradle files
+.gradle
+
 # Ubuntu file Editor swap
 *~
 .swp
