@@ -51,9 +51,10 @@ public abstract class KikMessage
      *
      * @param isForwardable
      */
-    public void setForwardable(boolean isForwardable)
+    public KikMessage setForwardable(boolean isForwardable)
     {
         _forwardable = isForwardable;
+        return this;
     }
 
     protected KikMessage(Context context)
@@ -79,7 +80,7 @@ public abstract class KikMessage
      * @param fallbackURL
      * @param platform
      */
-    public void addFallbackURL(String fallbackURL, KikMessagePlatform platform)
+    public KikMessage addFallbackURL(String fallbackURL, KikMessagePlatform platform)
     {
         try {
             new URL(fallbackURL);
@@ -91,6 +92,7 @@ public abstract class KikMessage
         String fallback = (platform != null && !"".equals(platform._value)) ? platform._value + "," : "";
         fallback += fallbackURL;
         _URLs.add(fallback);
+        return this;
     }
 
     /**
