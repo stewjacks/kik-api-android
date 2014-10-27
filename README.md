@@ -109,7 +109,7 @@ KikClient.getInstance().backToKik(getActivity(0));
 
 ## Author
 
-Kik Interactive, dev@kik.com
+Kik Interactive
 
 ## License
 
