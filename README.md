@@ -2,7 +2,7 @@
 
 ## Installation
 
-You can install the Kik API using [Gradle](http://gradle.org). To include the library,
+You can install the Kik API using either [Gradle](http://gradle.org) or [Maven](http://maven.apache.org). To include the library,
 simply add the following dependency to your project:
 
 ### Maven (pom.xml)
