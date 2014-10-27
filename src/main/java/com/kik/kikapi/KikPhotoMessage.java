@@ -16,11 +16,11 @@ public class KikPhotoMessage extends KikMessage
      * A KikPhotoMessage requires an image URL and preview URL. Use KikImageUtil.createImageURL to
      * ensure a valid image and preview URL are provided.
      *
-     * @param context
-     * @param imageURL A valid URL to an image or a data uri representation of an image
-     * @param previewURL A valid URL to an image or a data uri representation of an image
+     * @param context    non-null Android context
+     * @param imageURL   a valid URL to an image or a data uri representation of an image
+     * @param previewURL a valid URL to an image or a data uri representation of an image to provide a thumbnail preview that will be displayed in your message
      */
-    public KikPhotoMessage(Context context, String imageURL, String previewURL)
+    public KikPhotoMessage(Context context, String imageURL, String previewURL) throws IllegalArgumentException
     {
         super(context);
         if (imageURL == null || previewURL == null) {
@@ -32,8 +32,9 @@ public class KikPhotoMessage extends KikMessage
 
     /**
      * KikPhotoMessage with a scaled preview and image from drawable resource.
-     * @param context
-     * @param drawable
+     *
+     * @param context  non-null Android context
+     * @param drawable a valid drawable that will be used for the image and preview for the photo message in Kik
      */
     public KikPhotoMessage(Context context, Drawable drawable)
     {
@@ -44,8 +45,9 @@ public class KikPhotoMessage extends KikMessage
 
     /**
      * KikPhotoMessage with a scaled preview and image from bitmap resource.
-     * @param context
-     * @param bitmap
+     *
+     * @param context non-null Android context
+     * @param bitmap  a valid bitmap that will be used for the image and preview for the photo message in Kik
      */
     public KikPhotoMessage(Context context, Bitmap bitmap)
     {
@@ -56,8 +58,9 @@ public class KikPhotoMessage extends KikMessage
 
     /**
      * KikPhotoMessage with a scaled preview and image from byte[] resource.
-     * @param context
-     * @param bytes
+     *
+     * @param context non-null Android context
+     * @param bytes   a valid byte array representation of an image that will be used for the image and preview for the photo message in Kik
      */
     public KikPhotoMessage(Context context, byte[] bytes)
     {

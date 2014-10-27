@@ -29,7 +29,9 @@ public class KikClient
     }
 
     /**
-     * Kik API call to return back to / or launch Kik
+     * Kik API call to launch or return back to Kik
+     *
+     * @param context a valid Android context
      */
     public void backToKik(Context context)
     {
@@ -39,7 +41,8 @@ public class KikClient
     /**
      * Kik API call to open a specified users profile
      *
-     * @param username - the Kik username of the profile you wish to open
+     * @param context   a valid Android context
+     * @param username  the Kik username of the profile you wish to open
      */
     public void openProfileForKikUsername(Context context, String username)
     {
@@ -49,7 +52,8 @@ public class KikClient
     /**
      * Kik API call to send a constructed KikMessage
      *
-     * @param message - the constructed KikMessage you wish to send through Kik
+     * @param context a valid Android context
+     * @param message the constructed KikMessage you wish to send through Kik
      */
     public void sendKikMessage(Context context, KikMessage message)
     {

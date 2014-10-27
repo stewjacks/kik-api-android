@@ -7,9 +7,15 @@ buildscript {
     }
 }
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 repositories {
     jcenter()
+}
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
 android {
@@ -38,4 +44,70 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = "1.12"
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories.mavenDeployer {
+
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            pom.artifactId = 'library'
+
+            /*repository(url: sonatypeRepositoryUrl) {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }*/
+            pom.groupId = 'com.kik'
+            pom.artifactId = 'KikAPI'
+            pom.version = '1.0.0-SNAPSHOT'
+            // Add other pom properties here if you want (developer details / licenses)
+            repository(url: "file://${buildDir}/release/${VERSION_NAME}")
+            pom.project {
+                name POM_NAME
+                packaging 'aar'
+                description POM_DESCRIPTION
+                url POM_URL
+
+                scm {
+                    url POM_SCM_URL
+                    connection POM_SCM_CONNECTION
+                    developerConnection POM_SCM_DEV_CONNECTION
+                }
+
+                licenses {
+                    license {
+                        name POM_LICENCE_NAME
+                        url POM_LICENCE_URL
+                        distribution POM_LICENCE_DIST
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+    task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    artifacts {
+        //archives packageReleaseJar
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
 }

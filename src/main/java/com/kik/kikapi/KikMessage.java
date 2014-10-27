@@ -49,7 +49,8 @@ public abstract class KikMessage
     /**
      * Set whether the KikMessage is forwardable. Default value is true.
      *
-     * @param isForwardable
+     * @param isForwardable <code>false</code> to disable the ability to forward the content message
+     * @return              The current instance of KikMessage with the forwardable property set
      */
     public KikMessage setForwardable(boolean isForwardable)
     {
@@ -57,8 +58,12 @@ public abstract class KikMessage
         return this;
     }
 
-    protected KikMessage(Context context)
+    protected KikMessage(Context context) throws IllegalArgumentException
     {
+        if (_context == null) {
+            throw new IllegalArgumentException("Context can't be null when creating a KikMessage");
+        }
+
         _context = context;
         _appPkg = _context.getPackageName();
 
@@ -76,9 +81,11 @@ public abstract class KikMessage
     }
 
     /**
-     * 
-     * @param fallbackURL
-     * @param platform
+     * Add a fallback url for a specified platform that will be displayed to the user upon opening the KikMessage
+     *
+     * @param fallbackURL a valid url to be displayed to the user
+     * @param platform    the platform which this fallbackURL should target
+     * @return            The current instance of KikMessage with the provided fallbackURL attached
      */
     public KikMessage addFallbackURL(String fallbackURL, KikMessagePlatform platform)
     {
@@ -96,8 +103,7 @@ public abstract class KikMessage
     }
 
     /**
-     * 
-     * @return
+     * @return A valid link representation of the KikMessage
      */
     protected String linkRepresentation()
     {
