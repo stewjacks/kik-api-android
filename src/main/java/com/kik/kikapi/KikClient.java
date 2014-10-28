@@ -17,7 +17,7 @@ public class KikClient
     private static final String KIK_MESSENGER_PLAY_STORE_WEB_URL = "market://details?id=kik.android";
     private static final String KIK_MESSENGER_API_BACK_URL = "kik-share://kik.com/back";
     private static final String KIK_MESSENGER_API_PROFILE_URL = "kik-share://kik.com/u/";
-    private static KikClient _kikClient = new KikClient();
+    private static final KikClient _kikClient = new KikClient();
 
     private KikClient()
     {
@@ -35,7 +35,7 @@ public class KikClient
      */
     public void backToKik(Context context)
     {
-        openKikURL(context, KIK_MESSENGER_API_BACK_URL);
+        openKikUrl(context, KIK_MESSENGER_API_BACK_URL);
     }
 
     /**
@@ -46,7 +46,7 @@ public class KikClient
      */
     public void openProfileForKikUsername(Context context, String username)
     {
-        openKikURL(context, KIK_MESSENGER_API_PROFILE_URL + username);
+        openKikUrl(context, KIK_MESSENGER_API_PROFILE_URL + username);
     }
 
     /**
@@ -57,10 +57,10 @@ public class KikClient
      */
     public void sendKikMessage(Context context, KikMessage message)
     {
-        openKikURL(context, message.linkRepresentation());
+        openKikUrl(context, message.linkRepresentation());
     }
 
-    private void openKikURL(Context context, String url)
+    private void openKikUrl(Context context, String url)
     {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);

@@ -54,8 +54,8 @@ KikClient.getInstance().sendKikMessage(getActivity(), message);
 ```
 
 - One of either ```title``` or ```text``` must be specified
-- The ```contentURL``` must be specified. This is the target URL that will be opened when the user taps on the message in Kik
-- ```previewURL``` is an optional image URL that can be specified to provide a thumbnail preview that will be displayed in your message
+- The ```contentUrl``` must be specified. This is the target URL that will be opened when the user taps on the message in Kik
+- ```previewUrl``` is an optional image URL that can be specified to provide a thumbnail preview that will be displayed in your message
 
 #### Photo
 
@@ -69,7 +69,7 @@ KikClient.getInstance().sendKikMessage(getActivity(), message);
 ```
 
 When sending an image URL, you can choose to specify a base64-encoded Data URI in place of a standard web URL. In this case, the data will be uploaded
-and downloaded from the Kik servers instead of directly accessing the image via the provided web URL. 
+and downloaded from the Kik servers instead of directly accessing the image via the provided web URL.
 
 Alternatively, you can specify a `Bitmap`, `byte[]` or `Drawable` as the photo to send.
 
@@ -94,7 +94,7 @@ message.forwardable = false;
 
 With any content message, you can specify fallback URLs. When the user opens your content message, Kik will check your fallback URLs to see which URL is supported on the current platform and display a link to the user which will allow them to navigate to that URL.
 
-A fallback URL can be any type of URL whether it is a link to a website (ie. `http://kik.com`) or a speciailized scheme for a native app (ie. `kik://users/kikteam/profile`).
+A fallback URL can be any type of URL whether it is a link to a website (ie. `http://kik.com`) or a specialized scheme for a native app (ie. `kik://users/kikteam/profile`).
 
 If your app supports both Android and iOS, you can add a link to the native scheme which would open your app on each respective platform. Also, if your app is not installed, Kik will detect that your native scheme is not handled. If this is the case, the next fallback URL in order will be presented to the user. This is an opportunity to add another fallback URL linking to the AppStore with an ITMS link or the Google Play Store with a web link.
 
@@ -107,12 +107,12 @@ public KikMessage addFallbackURL(String fallbackURL, KikMessagePlatform platform
 ```java
 ...
 // launch the app first if available
-message.addFallbackURL("test-iphone://api/launch", KikMessagePlatform.KIK_MESSAGE_PLATFORM_IPHONE);
-message.addFallbackURL("test-android://api/launch", KikMessagePlatform.KIK_MESSAGE_PLATFORM_ANDROID);
+message.addFallbackUrl("test-iphone://api/launch", KikMessagePlatform.KIK_MESSAGE_PLATFORM_IPHONE);
+message.addFallbackUrl("test-android://api/launch", KikMessagePlatform.KIK_MESSAGE_PLATFORM_ANDROID);
 
 // fallback to launching the app store on the given platform
-message.addFallbackURL("itms-apps://itunes.apple.com/ca/app/kik/id357218860?mt=8", KikMessagePlatform.KIK_MESSAGE_PLATFORM_IPHONE);
-message.addFallbackURL("https://play.google.com/store/apps/details?id=kik.android&hl=en", KikMessagePlatform.KIK_MESSAGE_PLATFORM_ANDROID);
+message.addFallbackUrl("itms-apps://itunes.apple.com/ca/app/kik/id357218860?mt=8", KikMessagePlatform.KIK_MESSAGE_PLATFORM_IPHONE);
+message.addFallbackUrl("https://play.google.com/store/apps/details?id=kik.android&hl=en", KikMessagePlatform.KIK_MESSAGE_PLATFORM_ANDROID);
 ```
 
 ### Returning to Kik After Opening Content
