@@ -40,7 +40,7 @@ public abstract class KikMessage
     protected String _title;
     protected String _text;
     protected boolean _forwardable = true;
-    protected ArrayList<String> _URLs = new ArrayList<String>();
+    protected ArrayList<String> _Urls = new ArrayList<String>();
     protected String _imageUrl;
     protected String _previewUrl;
     protected String _iconUrl;
@@ -77,28 +77,28 @@ public abstract class KikMessage
         }
         _appName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
         Drawable icon = pm.getApplicationIcon(ai);
-        _iconUrl = KikImageUtil.generateEncodedURLForImage(icon);
+        _iconUrl = KikImageUtil.generateEncodedUrlForImage(icon);
     }
 
     /**
-     * Add a fallback url for a specified platform that will be displayed to the user upon opening the KikMessage
+     * Add a fallback URL for a specified platform that will be displayed to the user upon opening the KikMessage
      *
-     * @param fallbackURL a valid url to be displayed to the user
-     * @param platform    the platform which this fallbackURL should target
-     * @return            The current instance of KikMessage with the provided fallbackURL attached
+     * @param fallbackUrl a valid URL to be displayed to the user
+     * @param platform    the platform which this fallbackUrl should target
+     * @return            The current instance of KikMessage with the provided fallbackUrl attached
      */
-    public KikMessage addFallbackURL(String fallbackURL, KikMessagePlatform platform)
+    public KikMessage addFallbackUrl(String fallbackUrl, KikMessagePlatform platform)
     {
         try {
-            new URL(fallbackURL);
+            new URL(fallbackUrl);
         }
         catch (MalformedURLException e) {
             // do nothing?
         }
         // Only insert the platform if it is defined
         String fallback = (platform != null && !"".equals(platform._value)) ? platform._value + "," : "";
-        fallback += fallbackURL;
-        _URLs.add(fallback);
+        fallback += fallbackUrl;
+        _Urls.add(fallback);
         return this;
     }
 
@@ -129,7 +129,7 @@ public abstract class KikMessage
         BasicNameValuePair forwardablePair = new BasicNameValuePair("forwardable", _forwardable ? "1" : "0");
         nameValuePairs.add(forwardablePair);
 
-        for (String fallbackUrl : _URLs) {
+        for (String fallbackUrl : _Urls) {
             BasicNameValuePair urlPair = new BasicNameValuePair("url", fallbackUrl);
             nameValuePairs.add(urlPair);
         }

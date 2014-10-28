@@ -19,11 +19,11 @@ public class KikImageUtil
      * @param drawable a valid BirmapDrawable to be encoded
      * @return         String representation of a Base64 encoded data URI
      */
-    public static String generateEncodedURLForImage(Drawable drawable)
+    public static String generateEncodedUrlForImage(Drawable drawable)
     {
         if (drawable != null && drawable instanceof BitmapDrawable) {
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            return generateEncodedURLForImage(bitmap);
+            return generateEncodedUrlForImage(bitmap);
         }
         else {
             return null;
@@ -36,13 +36,13 @@ public class KikImageUtil
      * @param bitmap a Bitmap to be encoded and compressed
      * @return       String representation of a Base64 encoded data URI
      */
-    public static String generateEncodedURLForImage(Bitmap bitmap)
+    public static String generateEncodedUrlForImage(Bitmap bitmap)
     {
         if (bitmap != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
             byte[] bitMapData = stream.toByteArray();
-            return generateEncodedURLForImage(bitMapData);
+            return generateEncodedUrlForImage(bitMapData);
         }
         else {
             return null;
@@ -55,7 +55,7 @@ public class KikImageUtil
      * @param bitMapData a byte array representation of an image
      * @return           String representation of a Base64 encoded data URI
      */
-    public static String generateEncodedURLForImage(byte[] bitMapData)
+    public static String generateEncodedUrlForImage(byte[] bitMapData)
     {
         if (bitMapData != null) {
             try {
