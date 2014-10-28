@@ -13,12 +13,12 @@ public class KikArticleMessage extends KikMessage
      * @param context    non-null Android context
      * @param title      the title of the KikMessage
      * @param text       the description text for the KikMessage
-     * @param contentURL a valid URL that will be loaded when the user opens the KikMessage
-     * @param previewURL a valid URL to an image or a data uri representation of an image to provide a thumbnail preview that will be displayed in your message
+     * @param contentUrl a valid URL that will be loaded when the user opens the KikMessage
+     * @param previewUrl a valid URL to an image or a data URI representation of an image to provide a thumbnail preview that will be displayed in your message
      *
      * @throws java.lang.IllegalArgumentException if both of the provided title and text, or the context are null
      */
-    public KikArticleMessage(Context context, String title, String text, String contentURL, String previewURL) throws IllegalArgumentException
+    public KikArticleMessage(Context context, String title, String text, String contentUrl, String previewUrl) throws IllegalArgumentException
     {
         super(context);
         if (title == null && text == null) {
@@ -26,8 +26,8 @@ public class KikArticleMessage extends KikMessage
         }
         _title = title;
         _text = text;
-        _previewUrl = previewURL;
-        addFallbackURL(contentURL, null);
+        _previewUrl = previewUrl;
+        addFallbackUrl(contentUrl, null);
     }
 
     @Override
