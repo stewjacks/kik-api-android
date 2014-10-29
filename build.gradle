@@ -59,8 +59,7 @@ afterEvaluate { project ->
 
             pom.groupId = 'com.kik'
             pom.artifactId = 'kik-api'
-            pom.version = '1.0.3-SNAPSHOT'
-            repository(url: "file://${buildDir}/release/${VERSION_NAME}")
+            pom.version = '1.0.1'
             pom.project {
                 name POM_NAME
                 packaging 'aar'
