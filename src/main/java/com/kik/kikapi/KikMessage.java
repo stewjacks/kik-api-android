@@ -1,18 +1,18 @@
 package com.kik.kikapi;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by costa on 2014-08-29.
@@ -44,13 +44,12 @@ public abstract class KikMessage
     protected String _imageUrl;
     protected String _previewUrl;
     protected String _iconUrl;
-    protected Context _context;
 
     /**
      * Set whether the KikMessage is forwardable. Default value is true.
      *
      * @param isForwardable <code>false</code> to disable the ability to forward the content message
-     * @return              The current instance of KikMessage with the forwardable property set
+     * @return The current instance of KikMessage with the forwardable property set
      */
     public KikMessage setForwardable(boolean isForwardable)
     {
@@ -60,14 +59,13 @@ public abstract class KikMessage
 
     protected KikMessage(Context context) throws IllegalArgumentException
     {
-        if (_context == null) {
+        if (context == null) {
             throw new IllegalArgumentException("Context can't be null when creating a KikMessage");
         }
 
-        _context = context;
-        _appPkg = _context.getPackageName();
+        _appPkg = context.getPackageName();
 
-        final PackageManager pm = _context.getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         ApplicationInfo ai;
         try {
             ai = pm.getApplicationInfo(_appPkg, 0);
@@ -84,8 +82,8 @@ public abstract class KikMessage
      * Add a fallback URL for a specified platform that will be displayed to the user upon opening the KikMessage
      *
      * @param fallbackUrl a valid URL to be displayed to the user
-     * @param platform    the platform which this fallbackUrl should target
-     * @return            The current instance of KikMessage with the provided fallbackUrl attached
+     * @param platform the platform which this fallbackUrl should target
+     * @return The current instance of KikMessage with the provided fallbackUrl attached
      */
     public KikMessage addFallbackUrl(String fallbackUrl, KikMessagePlatform platform)
     {
