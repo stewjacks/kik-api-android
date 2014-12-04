@@ -34,7 +34,7 @@ public abstract class KikMessage
     }
 
     private static final String KIK_MESSENGER_API_SEND_URL = "kik-share://kik.com/send/";
-
+    private static final int ICON_MAX_SIZE = 48;
     protected String _appName; // Required
     protected String _appPkg; // Required
     protected String _title;
@@ -75,7 +75,7 @@ public abstract class KikMessage
         }
         _appName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
         Drawable icon = pm.getApplicationIcon(ai);
-        _iconUrl = KikImageUtil.generateEncodedUrlForImage(KikImageUtil.generateScaledBitmap(icon, 32, 32));
+        _iconUrl = KikImageUtil.generateEncodedUrlForImage(KikImageUtil.generateScaledBitmap(icon, ICON_MAX_SIZE, ICON_MAX_SIZE));
     }
 
     /**
