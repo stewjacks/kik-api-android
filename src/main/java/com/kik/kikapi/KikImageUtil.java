@@ -52,7 +52,7 @@ public class KikImageUtil
     /**
      * Generates a base64 encoded data URI from the provided byte array
      *
-     * @param bitMapData a byte array representation of an image
+     * @param bitMapData a byte array representation of a jpg image
      * @return String representation of a Base64 encoded data URI
      */
     public static String generateEncodedUrlForImage(byte[] bitMapData)
