@@ -1,12 +1,12 @@
 package com.kik.kikapi;
 
-import java.io.ByteArrayOutputStream;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by costa on 2014-09-03.
@@ -17,7 +17,7 @@ public class KikImageUtil
      * Generates a Base64 encoded data URI from the provided Drawable
      *
      * @param drawable a valid BirmapDrawable to be encoded
-     * @return         String representation of a Base64 encoded data URI
+     * @return String representation of a Base64 encoded data URI
      */
     public static String generateEncodedUrlForImage(Drawable drawable)
     {
@@ -34,7 +34,7 @@ public class KikImageUtil
      * Generates a base64 encoded data URI from the provided Bitmap
      *
      * @param bitmap a Bitmap to be encoded and compressed
-     * @return       String representation of a Base64 encoded data URI
+     * @return String representation of a Base64 encoded data URI
      */
     public static String generateEncodedUrlForImage(Bitmap bitmap)
     {
@@ -52,14 +52,14 @@ public class KikImageUtil
     /**
      * Generates a base64 encoded data URI from the provided byte array
      *
-     * @param bitMapData a byte array representation of an image
-     * @return           String representation of a Base64 encoded data URI
+     * @param bitMapData a byte array representation of a jpg image
+     * @return String representation of a Base64 encoded data URI
      */
     public static String generateEncodedUrlForImage(byte[] bitMapData)
     {
         if (bitMapData != null) {
             try {
-                return "data:image/jpg;base64," + Base64.encodeToString(bitMapData, Base64.URL_SAFE);
+                return "data:image/jpg;base64," + Base64.encodeToString(bitMapData, Base64.NO_WRAP);
             }
             catch (AssertionError assertionError) {
                 return null;
@@ -73,10 +73,10 @@ public class KikImageUtil
     /**
      * Generates a bitmap scaled to provided width and height
      *
-     * @param drawable  a valid BitmapDrawable to be scaled
-     * @param width     the new Bitmap's desired width
-     * @param height    the new Bitmap's desired height
-     * @return          A Bitmap scaled to the provided height and width
+     * @param drawable a valid BitmapDrawable to be scaled
+     * @param width the new Bitmap's desired width
+     * @param height the new Bitmap's desired height
+     * @return A Bitmap scaled to the provided height and width
      */
     public static Bitmap generateScaledBitmap(Drawable drawable, int width, int height)
     {
@@ -93,9 +93,9 @@ public class KikImageUtil
      * Generates a bitmap scaled to provided width and height
      *
      * @param bitmap a Bitmap to be scaled
-     * @param width  the new Bitmap's desired width
+     * @param width the new Bitmap's desired width
      * @param height the new Bitmap's desired height
-     * @return       A Bitmap scaled to the provided height and width
+     * @return A Bitmap scaled to the provided height and width
      */
     public static Bitmap generateScaledBitmap(Bitmap bitmap, int width, int height)
     {
@@ -116,9 +116,9 @@ public class KikImageUtil
      * Generates a bitmap scaled to provided width and height
      *
      * @param bitMapData a byte array representation of an image to be scaled
-     * @param width      the new Bitmap's desired width
-     * @param height     the new Bitmap's desired height
-     * @return           A Bitmap scaled to the provided height and width
+     * @param width the new Bitmap's desired width
+     * @param height the new Bitmap's desired height
+     * @return A Bitmap scaled to the provided height and width
      */
     public static Bitmap generateScaledBitmap(byte[] bitMapData, int width, int height)
     {
