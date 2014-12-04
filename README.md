@@ -11,7 +11,7 @@ simply add the following dependency to your project:
 <dependency>
     <groupId>com.kik</groupId>
     <artifactId>kik-api</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -19,7 +19,7 @@ simply add the following dependency to your project:
 
 ```groovy
 dependencies {
-  compile 'com.kik:kik-api:1.0.1'
+  compile 'com.kik:kik-api:1.0.2'
 }
 ```
 
