@@ -75,7 +75,7 @@ public abstract class KikMessage
         }
         _appName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
         Drawable icon = pm.getApplicationIcon(ai);
-        _iconUrl = KikImageUtil.generateEncodedUrlForImage(icon);
+        _iconUrl = KikImageUtil.generateEncodedUrlForImage(KikImageUtil.generateScaledBitmap(icon, 32, 32));
     }
 
     /**
