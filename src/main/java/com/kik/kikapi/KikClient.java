@@ -1,12 +1,12 @@
 package com.kik.kikapi;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+
+import java.util.List;
 
 /**
  * Created by costa on 2014-08-29.
@@ -65,6 +65,7 @@ public class KikClient
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setData(Uri.parse(url));
 
         if (canLaunchIntent(context, intent)) {
