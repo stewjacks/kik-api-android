@@ -11,7 +11,7 @@ simply add the following dependency to your project:
 <dependency>
     <groupId>com.kik</groupId>
     <artifactId>kik-api</artifactId>
-    <version>1.0.2</version>
+    <version>1.1-BETA</version>
 </dependency>
 ```
 
@@ -19,7 +19,7 @@ simply add the following dependency to your project:
 
 ```groovy
 dependencies {
-  compile 'com.kik:kik-api:1.0.2'
+  compile 'com.kik:kik-api:1.1-BETA'
 }
 ```
 
@@ -79,6 +79,71 @@ Bitmap image = ...;
 KikPhotoMessage message = new KikPhotoMessage(getActivity(), bitmap);
 ```
 
+
+#### Video
+
+```java
+KikVideoMessage message = new KikVideoMessage(
+    getActivity(),
+    "http://www.videos.com/video.mp4",
+    "http://www.videos.com/video_preview.png");
+
+KikClient.getInstance().sendKikMessage(getActivity(), message);
+```
+
+Video files should be encoded using H.264 with baseline profile for video and AAC for audio. The container should be mp4. Video files must be no larger than 15mb and no longer than 2 minutes in duration. The provided preview image should match the first frame of the video and have the same aspect ratio as the video.
+
+If a video is marked to autoplay using the `videoShouldAutoplay` property, it must be no larger than 1mb. Developers are encouraged to test that their video content plays back reliably on a range of iOS and Android devices. 
+
+Alternatively, you can specify a `Uri` object referencing a video on disk. In this case, the video data will be uploaded to and hosted on the Kik servers.
+
+```java
+// Create a video message from a video Uri
+Uri videoUri = ...
+KikVideoMessage message = new KikVideoMessage(
+    getActivity(),
+    videoUri);
+```
+
+If you want your application to send a video that has no URI already referencing it, for example a video file stored in your application's internal storage, you must make use of the `KikContentProvider` by adding the following to your `AndroidManifest.xml`:
+
+```xml
+<provider
+    android:name="com.kik.kikapi.KikContentProvider"
+    android:authorities="com.your.company.name"
+    android:exported="true" />
+```
+
+and calling `KikContentProvider.init("com.your.company.name")`. Note that the authority declared in the manifest must be globally unique, and it must be the same string passed to `KikContentProvider.init()`. You may then call `KikContentProvider.getContentUri(filepath)` to retrieve a `Uri` referencing the video to be shared.
+
+```java
+// Create a video message from a video file
+File videoFile = new File(getApplicationContext().getCacheDir(), "video.mp4");
+Uri videoUri = KikContentProvider.getContentUri(videoFile.getPath());
+KikVideoMessage message = new KikVideoMessage(
+    getActivity(),
+    videoUri);
+```
+
+##### Video Message Attributes
+
+###### Looping
+If the `videoShouldLoop` property is set to `true`, the video will loop when played back. In other words, when playback reaches the end of the video it will start again at the beginning. The default value for `videoShouldLoop` is `false`.
+
+###### Autoplay
+If the `videoShouldAutoplay` property is set to `true `, the video will start playing automatically when it appears in a chat. The video will be muted by default with an unmute button provided to the user. When the unmute button is tapped, playback will restart from the beginning of the video with audio enabled. If the `videoShouldBeMuted` property is set to `true `, the unmute button will not be shown. If `videoShouldAutoplay` is set to `true ` the attached or linked video data must be less than 1mb. The default value for `videoShouldAutoplay` is `false `.
+
+###### Muted
+If the `videoShouldBeMuted` property is set to `true`, the video will be played with the audio track muted. In the case that `videoShouldAutoplay` is set to `true`, no unmute button will be shown. The default value for `videoShouldBeMuted` is `false`.
+
+```java
+...
+KikVideoMessage message = ...
+message.setShouldLoop(true);
+message.setShouldAutoplay(true);
+message.setShouldBeMuted(true);
+```
+
 ### Other Message Attributes
 
 #### Forwardable
@@ -87,7 +152,16 @@ If you do not want to allow a user to forward a particular content message on to
 
 ```java
 ...
-message.forwardable = false;
+message.setForwardable(false);
+```
+
+#### Disallow Saving
+
+If you do not want to allow a user to save a particular photo or video message you can set the `disallowSave` attribute on a `KikMessage` to `true`. The default value for `disallowSave` is `false`.
+
+```java
+...
+message.setDisallowSave(true);
 ```
 
 #### Fallback URLs
