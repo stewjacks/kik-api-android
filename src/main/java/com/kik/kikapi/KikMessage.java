@@ -70,6 +70,11 @@ public abstract class KikMessage
         return this;
     }
 
+    public KikMessage setShareImage(Drawable drawable) {
+        _iconUrl = KikImageUtil.generateEncodedUrlForImage(KikImageUtil.generateScaledBitmap(drawable, ICON_MAX_SIZE, ICON_MAX_SIZE));
+        return this;
+    }
+
     protected KikMessage(Context context) throws IllegalArgumentException
     {
         if (context == null) {
